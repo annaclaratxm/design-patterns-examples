@@ -31,19 +31,18 @@ class ExpensesFactory {
         if (!ExpensesClass) {
             throw new Error("Tipo de gasto não suportado.");
         }
-        return new ExpensesClass(amount); // passa amount direto
+        return new ExpensesClass(amount);
     }
 }
 
 // Código do cliente
 function main() {
     try {
-        // Aqui criamos as instâncias já com o valor, sem usar variável amount fora
         const creditExpense = ExpensesFactory.createExpenses("credit", 500);
         const debitExpense = ExpensesFactory.createExpenses("debit", 200);
 
-        creditExpense.pay(); // Saída: Pagando com credit no valor de R$ 500
-        debitExpense.pay();  // Saída: Pagando com debit no valor de R$ 200
+        creditExpense.pay();
+        debitExpense.pay();
     } catch (err) {
         console.error("Erro ao processar gasto...", err.message);
     }
