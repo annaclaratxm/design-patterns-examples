@@ -44,32 +44,3 @@ function main(type) {
 
 main("car");
 main("truck");
-
-// Abstract Factory
-class VehicleFactory {
-  createSmallVehicle() {
-    throw new Error("Método abstrato deve ser implementado");
-  }
-  createLargeVehicle() {
-    throw new Error("Método abstrato deve ser implementado");
-  }
-}
-
-// Concrete Factories
-class CarFactory extends VehicleFactory {
-  createSmallVehicle() {
-    return new Motorcycle();
-  }
-  createLargeVehicle() {
-    return new Car();
-  }
-}
-
-class TruckFactory extends VehicleFactory {
-  createSmallVehicle() {
-    return new Truck();
-  }
-  createLargeVehicle() {
-    return new Bus();
-  }
-}
