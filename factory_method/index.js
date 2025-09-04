@@ -1,58 +1,56 @@
 // Classes concretas
-class EmailNotification {
-  send(message) {
-    console.log(`Enviando ${message}`);
+class DebitCard {
+  constructor(amount) {
+    this.amount = amount; // o amount fica armazenado na instância
+  }
+
+  pay() {
+    console.log(`Pagando com debit no valor de R$ ${this.amount}`);
   }
 }
 
-class SMSNotification {
-  send(message) {
-    console.log(`Enviando ${message}`);
+class CreditCard {
+  constructor(amount) {
+    this.amount = amount; // o amount fica armazenado na instância
+  }
+
+  pay() {
+    console.log(`Pagando com credit no valor de R$ ${this.amount}`);
   }
 }
 
-class PushNotification {
-  send(message) {
-    console.log(`Enviando ${message}`);
-  }
-}
-
-class WhatsAppNotification {
-  send(message) {
-    console.log(`Enviando ${message}`);
-  }
-}
-
-// Usando Factory Method
-class NotificationFactory {
+// Factory Method
+class ExpensesFactory {
   static types = {
-    email: EmailNotification,
-    sms: SMSNotification,
-    push: PushNotification,
-    whatsapp: WhatsAppNotification,
+    credit: CreditCard,
+    debit: DebitCard,
   };
 
-  static createNotification(type) {
-    const NotificationClass = this.types[type];
-    if (!NotificationClass) {
-      throw new Error("Tipo de notificação ainda não suportado");
+  static createExpenses(type, amount) {
+    const ExpensesClass = this.types[type];
+    if (!ExpensesClass) {
+      throw new Error("Tipo de gasto não suportado.");
     }
-    return new NotificationClass();
+    return new ExpensesClass(amount); // passa amount aqui
   }
 }
 
 // Código do cliente
 function main() {
-  const notifications = ["email", "sms", "push", "whatsapp"];
+  const expensesTypes = ["credit", "debit"];
+  const amounts = { credit: 500, debit: 200 }; // valores de exemplo
+
   try {
-    notifications.forEach((type) => {
-      const notification = NotificationFactory.createNotification(type);
-      notification.send(
-        `${type}... Pix recebido de Ugioni no valor de R$ 100,00`
-      );
+    expensesTypes.forEach((type) => {
+      // Aqui pegamos o valor do objeto amounts
+      const amount = amounts[type];
+      // Criamos a instância já com o amount
+      const expenses = ExpensesFactory.createExpenses(type, amount);
+      // Chamamos pay sem passar parâmetro
+      expenses.pay();
     });
   } catch (err) {
-    console.error("Erro ao enviar...", err.message);
+    console.error("Erro ao processar gasto...", err.message);
   }
 }
 
