@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "problem": "node problem.js"
+    "start": "node practiceProblemResolved.js",
+    "problem": "node practiceProblem.js"
   },
   "author": "Ugioni",
   "license": "MIT"

@@ -127,4 +127,4 @@ const satc = new ComputerBuilder().setCPU("Celeron 400").build();
 gamer.showConfig();
 office.showConfig();
 dev.showConfig();
-//satc.showConfig();
+satc.showConfig();
